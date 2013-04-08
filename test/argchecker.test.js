@@ -278,10 +278,7 @@ describe('argchecker', function() {
         }
       });
       ac.check(['-a', '1', '-a', '2', '-a', '3']);
-      assert.equal(ac.get('-a').length, 3);
-      assert.equal(ac.get('-a')[0], '1');
-      assert.equal(ac.get('-a')[1], '2');
-      assert.equal(ac.get('-a')[2], '3');
+      assert.deepEqual(ac.get('-a'), ['1', '2', '3']);
       assert.equal(ac.isOn('-a'), true);
     });
 
@@ -409,10 +406,7 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
-      assert.equal(ac.get('ZZ').length, 3);
-      assert.equal(ac.get('ZZ')[0], '30');
-      assert.equal(ac.get('ZZ')[1], '31');
-      assert.equal(ac.get('ZZ')[2], '32');
+      assert.deepEqual(ac.get('ZZ'), ['30', '31', '32']);
       assert.equal(ac.isOn('ZZ'), true);
     });
 
@@ -427,10 +421,7 @@ describe('argchecker', function() {
       ac.check(['10', '20', '21', '22', '30']);
       assert.equal(ac.get('XX'), '10');
       assert.equal(ac.isOn('XX'), true);
-      assert.equal(ac.get('YY').length, 3);
-      assert.equal(ac.get('YY')[0], '20');
-      assert.equal(ac.get('YY')[1], '21');
-      assert.equal(ac.get('YY')[2], '22');
+      assert.deepEqual(ac.get('YY'), ['20', '21', '22']);
       assert.equal(ac.isOn('YY'), true);
       assert.equal(ac.get('ZZ'), '30');
       assert.equal(ac.isOn('ZZ'), true);
@@ -568,10 +559,7 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 3);
-      assert.equal(ac.get('XX')[0], '10');
-      assert.equal(ac.get('XX')[1], '11');
-      assert.equal(ac.get('XX')[2], '12');
+      assert.deepEqual(ac.get('XX'), ['10', '11', '12']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -596,10 +584,7 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-c'), true);
       assert.equal(ac.get('XX'), '10');
       assert.equal(ac.isOn('XX'), true);
-      assert.equal(ac.get('YY').length, 3);
-      assert.equal(ac.get('YY')[0], '20');
-      assert.equal(ac.get('YY')[1], '21');
-      assert.equal(ac.get('YY')[2], '22');
+      assert.deepEqual(ac.get('YY'), ['20', '21', '22']);
       assert.equal(ac.isOn('YY'), true);
     });
 
@@ -618,15 +603,9 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 3);
-      assert.equal(ac.get('-c')[0], '3');
-      assert.equal(ac.get('-c')[1], '4');
-      assert.equal(ac.get('-c')[2], '5');
+      assert.deepEqual(ac.get('-c'), ['3', '4', '5']);
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 3);
-      assert.equal(ac.get('XX')[0], '10');
-      assert.equal(ac.get('XX')[1], '11');
-      assert.equal(ac.get('XX')[2], '12');
+      assert.deepEqual(ac.get('XX'), ['10', '11', '12']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -647,15 +626,9 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 3);
-      assert.equal(ac.get('-c')[0], '3');
-      assert.equal(ac.get('-c')[1], '4');
-      assert.equal(ac.get('-c')[2], '5');
+      assert.deepEqual(ac.get('-c'), ['3', '4', '5']);
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 3);
-      assert.equal(ac.get('XX')[0], '10');
-      assert.equal(ac.get('XX')[1], '11');
-      assert.equal(ac.get('XX')[2], '12');
+      assert.deepEqual(ac.get('XX'), ['10', '11', '12']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -677,14 +650,9 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 3);
-      assert.equal(ac.get('-c')[0], '3');
-      assert.equal(ac.get('-c')[1], '4');
-      assert.equal(ac.get('-c')[2], '5');
+      assert.deepEqual(ac.get('-c'), ['3', '4', '5']);
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 2);
-      assert.equal(ac.get('XX')[0], '10');
-      assert.equal(ac.get('XX')[1], '11');
+      assert.deepEqual(ac.get('XX'), ['10', '11']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -708,13 +676,9 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 3);
-      assert.equal(ac.get('-c')[0], '3');
-      assert.equal(ac.get('-c')[1], '4');
-      assert.equal(ac.get('-c')[2], '5');
+      assert.deepEqual(ac.get('-c'), ['3', '4', '5']);
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 1);
-      assert.equal(ac.get('XX')[0], '10');
+      assert.deepEqual(ac.get('XX'), ['10']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -738,13 +702,9 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 3);
-      assert.equal(ac.get('-c')[0], '3');
-      assert.equal(ac.get('-c')[1], '4');
-      assert.equal(ac.get('-c')[2], '5');
+      assert.deepEqual(ac.get('-c'), ['3', '4', '5']);
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX').length, 1);
-      assert.equal(ac.get('XX')[0], '10');
+      assert.deepEqual(ac.get('XX'), ['10']);
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), undefined);
       assert.equal(ac.isOn('YY'), false);
