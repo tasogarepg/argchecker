@@ -449,7 +449,7 @@ describe('argchecker', function() {
       assert.equal(ac.get('XX'), '10');
       assert.equal(ac.isOn('XX'), true);
     });
-    
+
     it('expect:a(PD),XX(M) | arg:a,XX >> exception', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
@@ -461,7 +461,7 @@ describe('argchecker', function() {
         ac.check(['-a', '10']);
       })
     });
-    
+
     it('expect:a(PD),b,c(P),XX | arg:a,b,c(P),XX', function() {
       var ac = new ArgChecker({
         expect: {
@@ -707,7 +707,7 @@ describe('argchecker', function() {
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
-      assert.equal(ac.isOn('-b'), true);                                
+      assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
       assert.equal(ac.get('-c')[1], '4');
@@ -737,7 +737,7 @@ describe('argchecker', function() {
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
-      assert.equal(ac.isOn('-b'), true);                                
+      assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
       assert.equal(ac.get('-c')[1], '4');
