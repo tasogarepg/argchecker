@@ -31,7 +31,7 @@ describe('argchecker', function() {
         }
       });
       ac.check(['-a']);
-      assert.equal(ac.get('-a').length, 0);
+      assert.equal(ac.get('-a'), undefined);
       assert.equal(ac.isOn('-a'), true);
     });
 
@@ -44,11 +44,11 @@ describe('argchecker', function() {
         }
       });
       ac.check(['-a', '-b', '-c']);
-      assert.equal(ac.get('-a').length, 0);
+      assert.equal(ac.get('-a'), undefined);
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
-      assert.equal(ac.get('-c').length, 0);
+      assert.equal(ac.get('-c'), undefined);
       assert.equal(ac.isOn('-c'), true);
     });
 
@@ -61,9 +61,9 @@ describe('argchecker', function() {
         }
       });
       ac.check(['-a', '-b']);
-      assert.equal(ac.get('-a').length, 0);
+      assert.equal(ac.get('-a'), undefined);
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), undefined);
       assert.equal(ac.isOn('-c'), false);
@@ -82,7 +82,7 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-a'), false);
       assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), false);
-      assert.equal(ac.get('-c').length, 0);
+      assert.equal(ac.get('-c'), undefined);
       assert.equal(ac.isOn('-c'), true);
     });
 
@@ -193,7 +193,7 @@ describe('argchecker', function() {
       ac.check(['-a', '1', '-b', '-c', '3']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -210,7 +210,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -474,7 +474,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '10']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -495,7 +495,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '10', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -518,7 +518,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '10']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -541,7 +541,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -564,7 +564,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '10', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -590,7 +590,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '10', '20', '21', '22']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c'), '3');
       assert.equal(ac.isOn('-c'), true);
@@ -616,7 +616,7 @@ describe('argchecker', function() {
       ac.check(['-a', '-b', '-c', '3', '-c', '4', '-c', '5', '10', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
@@ -645,7 +645,7 @@ describe('argchecker', function() {
       ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
@@ -675,7 +675,7 @@ describe('argchecker', function() {
       ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '20', '30']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
@@ -706,14 +706,15 @@ describe('argchecker', function() {
       ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);                                
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
       assert.equal(ac.get('-c')[1], '4');
       assert.equal(ac.get('-c')[2], '5');
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX'), '10');
+      assert.equal(ac.get('XX').length, 1);
+      assert.equal(ac.get('XX')[0], '10');
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), '20');
       assert.equal(ac.isOn('YY'), true);
@@ -735,14 +736,15 @@ describe('argchecker', function() {
       ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '30']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
-      assert.equal(ac.get('-b').length, 0);
+      assert.equal(ac.get('-b'), undefined);
       assert.equal(ac.isOn('-b'), true);                                
       assert.equal(ac.get('-c').length, 3);
       assert.equal(ac.get('-c')[0], '3');
       assert.equal(ac.get('-c')[1], '4');
       assert.equal(ac.get('-c')[2], '5');
       assert.equal(ac.isOn('-c'), true);
-      assert.equal(ac.get('XX'), '10');
+      assert.equal(ac.get('XX').length, 1);
+      assert.equal(ac.get('XX')[0], '10');
       assert.equal(ac.isOn('XX'), true);
       assert.equal(ac.get('YY'), undefined);
       assert.equal(ac.isOn('YY'), false);
@@ -754,6 +756,9 @@ describe('argchecker', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
           expect: {
+            '-a': {param: 'PARAM_A', default:'1'},
+            '-b': {},
+            '-c': {param: 'PARAM_C', repeat: true},
             'XX': {must: true},
             'YY': {},
             'ZZ': {must: true}
