@@ -1,6 +1,6 @@
 {
   "name": "argchecker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A command line options parser",
   "keywords": ["argument", "option", "command", "cli"],
   "author": "tasogarepg <tasogare.pg@gmail.com>",
