@@ -19,7 +19,7 @@ describe('argchecker', function() {
         },
         name: 'testapp'
       });
-      assert.equal(ac.usage, 'Usage: testapp [-a [PARAM_A]] [-b] [-c PARAM_C] ... [XX] ... [YY] ZZ');
+      assert.equal(ac.usage, 'Usage: testapp [-a PARAM_A] [-b] [-c PARAM_C] ... [XX] ... [YY] ZZ');
     });
   });
 
@@ -199,7 +199,7 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('-c'), true);
     });
 
-    it('expect:a(PD),b,c(P) | arg:a,b,c(P)', function() {
+    it('expect:a(PD),b,c(P) | arg:b,c(P)', function() {
       var ac = new ArgChecker({
         expect: {
           '-a': {param: 'PARAM_A', default:'1'},
@@ -207,7 +207,7 @@ describe('argchecker', function() {
           '-c': {param: 'PARAM_C'}
         }
       });
-      ac.check(['-a', '-b', '-c', '3']);
+      ac.check(['-b', '-c', '3']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -427,14 +427,14 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('ZZ'), true);
     });
 
-    it('expect:a(PD),XX(M) | arg:a,-,XX', function() {
+    it('expect:a(PD),XX(M) | arg:XX', function() {
       var ac = new ArgChecker({
         expect: {
           '-a': {param: 'PARAM_A', default:'1'},
           'XX': {must: true}
         }
       });
-      ac.check(['-a', '-', '10']);
+      ac.check(['10']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('XX'), '10');
@@ -453,16 +453,16 @@ describe('argchecker', function() {
       })
     });
 
-    it('expect:a(PD),b,c(P),XX | arg:a,b,c(P),XX', function() {
+    it('expect:a(PD),b,c(P),XX | arg:a(P),b,c(P),XX', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '10']);
+      ac.check(['-a', '1', '-b', '-c', '3', '10']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -473,17 +473,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('XX'), true);
     });
 
-    it('expect:a(PD),b,c(P),XX,YY | arg:a,b,c(P),XX,YY', function() {
+    it('expect:a(PD),b,c(P),XX,YY | arg:a(P),b,c(P),XX,YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {},
           'YY': {}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '10', '20']);
+      ac.check(['-a', '1', '-b', '-c', '3', '10', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -496,17 +496,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(P),XX,YY | arg:a,b,c(P),XX', function() {
+    it('expect:a(PD),b,c(P),XX,YY | arg:a(P),b,c(P),XX', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {},
           'YY': {}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '10']);
+      ac.check(['-a', '1', '-b', '-c', '3', '10']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -519,17 +519,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), false);
     });
 
-    it('expect:a(PD),b,c(P),XX,YY(M) | arg:a,b,c(P),YY', function() {
+    it('expect:a(PD),b,c(P),XX,YY(M) | arg:a(P),b,c(P),YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {},
           'YY': {must: true}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '20']);
+      ac.check(['-a', '1', '-b', '-c', '3', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -542,17 +542,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(P),XX(R),YY(M) | arg:a,b,c(P),XX1,XX2,XX3,YY', function() {
+    it('expect:a(PD),b,c(P),XX(R),YY(M) | arg:a(P),b,c(P),XX1,XX2,XX3,YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {repeat: true},
           'YY': {must: true}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '10', '11', '12', '20']);
+      ac.check(['-a', '1', '-b', '-c', '3', '10', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -565,17 +565,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(P),XX(M),YY(R) | arg:a,b,c(P),XX,YY1,YY2,YY3', function() {
+    it('expect:a(PD),b,c(P),XX(M),YY(R) | arg:a(P),b,c(P),XX,YY1,YY2,YY3', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C'},
           'XX': {must: true},
           'YY': {repeat: true}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '10', '20', '21', '22']);
+      ac.check(['-a', '1', '-b', '-c', '3', '10', '20', '21', '22']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -588,17 +588,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(PR),XX(R),YY(M) | arg:a,b,c(P),c(P),c(P),XX1,XX2,XX3,YY', function() {
+    it('expect:a(PD),b,c(PR),XX(R),YY(M) | arg:a(P),b,c(P),c(P),c(P),XX1,XX2,XX3,YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C', repeat: true},
           'XX': {repeat: true},
           'YY': {must: true}
         }
       });
-      ac.check(['-a', '-b', '-c', '3', '-c', '4', '-c', '5', '10', '11', '12', '20']);
+      ac.check(['-a', '1', '-b', '-c', '3', '-c', '4', '-c', '5', '10', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -611,17 +611,17 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(PR),XX(R),YY(M) | arg:XX1,a,b,c(P),c(P),c(P),XX2,XX3,YY', function() {
+    it('expect:a(PD),b,c(PR),XX(R),YY(M) | arg:XX1,a(P),b,c(P),c(P),c(P),XX2,XX3,YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C', repeat: true},
           'XX': {repeat: true},
           'YY': {must: true}
         }
       });
-      ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '12', '20']);
+      ac.check(['10', '-a', '1', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '12', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -634,10 +634,10 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('YY'), true);
     });
 
-    it('expect:a(PD),b,c(PR),XX(R),YY(M),ZZ | arg:XX1,a,b,c(P),c(P),c(P),XX2,YY,ZZ', function() {
+    it('expect:a(PD),b,c(PR),XX(R),YY(M),ZZ | arg:XX1,a(P),b,c(P),c(P),c(P),XX2,YY,ZZ', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C', repeat: true},
           'XX': {repeat: true},
@@ -645,7 +645,7 @@ describe('argchecker', function() {
           'ZZ': {}
         }
       });
-      ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '20', '30']);
+      ac.check(['10', '-a', '1', '-b', '-c', '3', '-c', '4', '-c', '5', '11', '20', '30']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -660,10 +660,10 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('ZZ'), true);
     });
 
-    it('expect:a(PD),b,c(PR),XX(R),YY(M),ZZ | arg:XX,a,b,c(P),c(P),c(P),YY', function() {
+    it('expect:a(PD),b,c(PR),XX(R),YY(M),ZZ | arg:XX,a(P),b,c(P),c(P),c(P),YY', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C', repeat: true},
           'XX': {repeat: true},
@@ -671,7 +671,7 @@ describe('argchecker', function() {
           'ZZ': {}
         }
       });
-      ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '20']);
+      ac.check(['10', '-a', '1', '-b', '-c', '3', '-c', '4', '-c', '5', '20']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -686,10 +686,10 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('ZZ'), false);
     });
 
-    it('expect:a(PD),b,c(PR),XX(R),YY,ZZ(M) | arg:XX,a,b,c(P),c(P),c(P),ZZ', function() {
+    it('expect:a(PD),b,c(PR),XX(R),YY,ZZ(M) | arg:XX,a(P),b,c(P),c(P),c(P),ZZ', function() {
       var ac = new ArgChecker({
         expect: {
-          '-a': {param: 'PARAM_A', default:'1'},
+          '-a': {param: 'PARAM_A', default:'5'},
           '-b': {},
           '-c': {param: 'PARAM_C', repeat: true},
           'XX': {repeat: true},
@@ -697,7 +697,7 @@ describe('argchecker', function() {
           'ZZ': {must: true}
         }
       });
-      ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '-c', '5', '30']);
+      ac.check(['10', '-a', '1', '-b', '-c', '3', '-c', '4', '-c', '5', '30']);
       assert.equal(ac.get('-a'), '1');
       assert.equal(ac.isOn('-a'), true);
       assert.equal(ac.get('-b'), undefined);
@@ -712,11 +712,11 @@ describe('argchecker', function() {
       assert.equal(ac.isOn('ZZ'), true);
     });
 
-    it('expect:a(PD),b,c(PR),XX(M),YY,ZZ(M) | arg:XX,a,b,c(P),c(P),YY,ZZ1,ZZ2 >> exception', function() {
+    it('expect:a(PD),b,c(PR),XX(M),YY,ZZ(M) | arg:XX,a(P),b,c(P),c(P),YY,ZZ1,ZZ2 >> exception', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
           expect: {
-            '-a': {param: 'PARAM_A', default:'1'},
+            '-a': {param: 'PARAM_A', default:'5'},
             '-b': {},
             '-c': {param: 'PARAM_C', repeat: true},
             'XX': {must: true},
@@ -724,7 +724,7 @@ describe('argchecker', function() {
             'ZZ': {must: true}
           }
         });
-        ac.check(['10', '-a', '-b', '-c', '3', '-c', '4', '20', '31', '32']);
+        ac.check(['10', '-a', '1', '-b', '-c', '3', '-c', '4', '20', '31', '32']);
       })
     });
 
