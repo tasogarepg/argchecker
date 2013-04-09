@@ -150,11 +150,6 @@ var ac = require('argchecker').check({
   }
 });
 ```
-in command line
-
-    $ app -l - XXX
-
-Please note that `-` is after `-l`. This is for not regarding XXX as a parameter of `-l`.
 
 ### name (top level only)
 "name" is used in the usage information.
