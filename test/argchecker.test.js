@@ -238,6 +238,40 @@ describe('argchecker', function() {
       })
     });
 
+    it('expect:a(S) b(M) | arg:a', function() {
+      var ac = new ArgChecker({
+        expect: {
+          '-a': {solo: true},
+          '-b': {must: true}
+        }
+      });
+      ac.check(['-a']);
+      assert.equal(ac.isOn('-a'), true);
+    });
+
+    it('expect:a(PS) b(M) | arg:a(P)', function() {
+      var ac = new ArgChecker({
+        expect: {
+          '-a': {param: 'PARAM_A', solo: true},
+          '-b': {must: true}
+        }
+      });
+      ac.check(['-a', 1]);
+      assert.equal(ac.get('-a'), '1');
+      assert.equal(ac.isOn('-a'), true);
+    });
+
+    it('expect:a(PS) | arg:a >> exception', function() {
+      assert.throws(function() {
+        var ac = new ArgChecker({
+          expect: {
+            '-a': {param: 'PARAM_A', solo: true},
+          }
+        });
+        ac.check(['-a']);
+      })
+    });
+
     it('expect:a | arg:a,a >> exception', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
