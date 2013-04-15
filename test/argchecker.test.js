@@ -272,6 +272,18 @@ describe('argchecker', function() {
       })
     });
 
+    it('expect:a(S) XX(M) | arg:', function() {
+      assert.throws(function() {
+        var ac = new ArgChecker({
+          expect: {
+            '-a': {solo: true},
+            'XX': {must: true}
+          }
+        });
+        ac.check([]);
+      })
+    });
+
     it('expect:a | arg:a,a >> exception', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
