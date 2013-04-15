@@ -272,7 +272,7 @@ describe('argchecker', function() {
       })
     });
 
-    it('expect:a(S) XX(M) | arg:', function() {
+    it('expect:a(S) XX(M) | arg: >> exception', function() {
       assert.throws(function() {
         var ac = new ArgChecker({
           expect: {
