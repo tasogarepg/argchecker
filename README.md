@@ -151,6 +151,17 @@ var ac = require('argchecker').check({
 });
 ```
 
+### solo (for option)
+If 'solo' tag's option comes, all other 'must' tags are not checked.
+```js
+var ac = require('argchecker').check({
+  expect: {
+    '-v': {solo: true},   // <-- 
+    'arg1': {must: true}
+  }
+});
+```
+
 ### name (top level only)
 "name" is used in the usage information.
 ```js
