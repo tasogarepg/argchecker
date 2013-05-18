@@ -4,6 +4,7 @@
   "description": "A command line options parser",
   "keywords": ["argument", "option", "command", "cli"],
   "author": "tasogarepg <tasogare.pg@gmail.com>",
+  "license": "MIT",
   "homepage": "https://github.com/tasogarepg/argchecker",
   "repository": "git://github.com/tasogarepg/argchecker.git",
   "main": "./lib/argchecker.js",
